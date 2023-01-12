@@ -13,34 +13,51 @@ function trouverBaies (){
     return message = `Vous trouver ${baies} baies dans les buissons!\nVous avez maintenant ${nbrBaies} dans votre sac.`;
 }
 
+function reduclist(liste,pos){
+    liste.splice(pos-1, 1);
+    nbrRennes--;
+    return liste;
+}
+
 //######### fonction Rennes #########
 function chercherRennes(nombreRennes,listedesrennes){
     let renneNumero=rndm(0,nombreRennes);
+    let message ="";
+    console.table(listedesrennes);
     switch(true){
         case listedesrennes[renneNumero]==1:
             renneAffame();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==2:
             renneAffame();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==3:
             renneAppeurer();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==4:
             renneAppeurer();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==5:
             renneEnerver();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==6:
             renneEnerver();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
             break;
         case listedesrennes[renneNumero]==7:
             rodolph();
+            listedesrennes = reduclist(listedesrennes,renneNumero)
+            break;
+        default :
+            message = `"vous ne trouvez aucun renne ..."\n${tempsRestant(minsRestante)}`
+            alert(message)
             break;
     }
-    listedesrennes.splice(renneNumero-1, 1);
-    nbrRennes--;
     minsRestante -=40;
     return listedesrennes;
 }
@@ -115,7 +132,7 @@ function renneEnerver(){
 
 function rodolph(){
     let reussite = true,lanceDe=0,choix=0,message="";
-    alert("Vous trouver un rennes enervé !");
+    alert("Vous trouver Rodolph !");
     while(reussite){
         choix=menuRennes();
         switch(choix){
@@ -140,13 +157,13 @@ function actionRenne (min,max,rdnmin,rdnmax){
     lanceDe = rndm(rdnmin,rdnmax);
     minsRestante -= 5;
     if(lanceDe<=max && lanceDe>=min){
-        message=`Bravo vous avez attraper un renne !! \n${tempsRestant(minsRestante)}`;
+        message=`Bravo vous avez attraper un renne !!!!!! \n${tempsRestant(minsRestante)}`;
         alert(message);
         reussite=false;
         return false;
     }
     else{
-        message = `Vous avez échoué ... tenté peu etre autre chose.\n${tempsRestant(minsRestante)}`;
+        message = `Vous avez échoué ...... tenté peu etre autre chose.\n${tempsRestant(minsRestante)}`;
         alert(message);
         return true
     }   
@@ -225,3 +242,5 @@ if (nbrRennes == 0 && minsRestante>0){
 else{
     alert(`Malheureusement vous n'avez pas reussis a sauver noël,\n ${creatRenneRestant(nbrRennes)}... `)
 }
+
+console.table(listeRennes);
